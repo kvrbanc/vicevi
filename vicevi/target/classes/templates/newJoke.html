@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Add a new joke</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/home">Joke system</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Joke list
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/new">Add a joke
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Content -->
+<div class="container" style="min-height:85vh;padding-top:35px;">
+    <form class="text-center border border-light p-5" action="#"
+          th:action="@{/new}" th:object="${jokeForm}" method="post" style="border:3px solid grey">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><strong>Joke content</strong></label>
+                <div class="col-sm-10">
+                    <textarea rows="3" class="form-control mb-4" th:field="*{content}"
+                              placeholder="A ham and a sandwich walk into a bar..." required></textarea>
+                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><strong>Joke category</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" th:field="*{categoryId}" required>
+                    <option value="0" style="font-color:red;">select category</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" style="font-color:green;"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-7">
+                <span> </span>
+            </div>
+            <div class="col-sm-5">
+                <button  id="subRest" class="btn btn-success" type="submit" style="float: right;">Add a joke</button>
+            </div>
+        </div>
+    </form>
+    <div th:if="${message}!= null" style="padding-top:10px;text-align:center;">
+        <p th:text="${message}" style="font-size:18px;"></p>
+    </div>
+
+
+</div>
+<!-- /.container -->
+<!-- Footer -->
+<footer class="py-5 bg-dark ">
+    <div class="container">
+        <p class="m-0 text-center text-white">Joke System | Kristijan Vrbanc 2019</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</body>
+</html>
